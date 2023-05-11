@@ -1,7 +1,7 @@
-# Starfighter
+# StarFighter
 
 ## Table of Contents
-- [Starfighter](#starfighter)
+- [StarFighter](#starfighter)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Installation](#installation)
