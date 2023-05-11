@@ -7,8 +7,8 @@ import java.awt.Canvas;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Random;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -107,7 +107,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         pewSound = new Runnable() {
             public void run() {
                 try {
-                    playClip(new File("pew.wav"));
+                    playClip(this.getClass().getResource("pew.wav"));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -116,7 +116,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         oneUpSound = new Runnable() {
             public void run() {
                 try {
-                    playClip(new File("1upSound.wav"));
+                    playClip(this.getClass().getResource("1upSound.wav"));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -129,7 +129,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
         {
             bgmusic = AudioSystem.getClip();
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("background.wav"));
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(this.getClass().getResource("background.wav"));
             bgmusic.open(inputStream);
             FloatControl gainControl = (FloatControl) bgmusic.getControl(FloatControl.Type.MASTER_GAIN);
             gainControl.setValue(20f * (float) Math.log10(.2f));
@@ -141,7 +141,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         // setup star sound
         try {
             starSound = AudioSystem.getClip();
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(new File("starSound.wav"));
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(this.getClass().getResource("starSound.wav"));
             starSound.open(inputStream);
             FloatControl gainControl = (FloatControl) starSound.getControl(FloatControl.Type.MASTER_GAIN);
             gainControl.setValue(20f * (float) Math.log10(1.5f));
@@ -162,7 +162,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
     // step. The reason it is so complex is because I want it to be able to reliably
     // play the entirety of an audio file without cutting it off (apparantly, java
     // clips can shut down randomly, so I fixed that with a custom listener).
-    private static void playClip(File clipFile) throws IOException,
+    private static void playClip(URL clipFile) throws IOException,
             UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
         // Create a listener for the clip. This listener will be notified when the clip
         // has finished playing. Here is a simple explanation:
@@ -225,7 +225,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         for (String s : AUDIOFILES) {
             try {
                 // load each audio file into a clip
-                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(s));
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(this.getClass().getResource(s));
                 Clip clip = AudioSystem.getClip();
                 // open the clip
                 clip.open(audioInputStream);
@@ -262,9 +262,9 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
             bgmusic.stop();
             horde.removeAll();
             graphToBack.setColor(Color.RED);
-            graphToBack.setFont(new Font("Serif", Font.PLAIN, 100));
+            graphToBack.setFont(new Font("Copperplate", Font.PLAIN, 100));
             graphToBack.drawString("GAME OVER", 100, 300);
-            graphToBack.setFont(new Font("Serif", Font.PLAIN, 50));
+            graphToBack.setFont(new Font("Copperplate", Font.PLAIN, 50));
             graphToBack.drawString("Score: " + score, 300, 400);
             graphToBack.drawString("Press R to restart", 250, 500);
             if (keys[5]) {
@@ -274,9 +274,9 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         } else if (nextLevelCountdown > 0) {
             // next level countdown
             graphToBack.setColor(Color.GREEN);
-            graphToBack.setFont(new Font("Serif", Font.PLAIN, 100));
+            graphToBack.setFont(new Font("Copperplate", Font.PLAIN, 100));
             graphToBack.drawString("Level " + level, 200, 300);
-            graphToBack.setFont(new Font("Serif", Font.PLAIN, 50));
+            graphToBack.setFont(new Font("Copperplate", Font.PLAIN, 50));
             graphToBack.drawString("Next level in " + nextLevelCountdown, 250, 400);
             nextLevelCountdown--;
         } else {
@@ -359,7 +359,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
             ((Graphics2D) graphToBack).setRenderingHint(
                     RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-            Font font = new Font("Serif", Font.PLAIN, 30);
+            Font font = new Font("Copperplate", Font.PLAIN, 30);
             graphToBack.setFont(font);
             graphToBack.setColor(Color.WHITE);
             graphToBack.drawString("Score: " + score, 50, 50);
