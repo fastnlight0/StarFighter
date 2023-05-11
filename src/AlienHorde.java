@@ -1,6 +1,6 @@
 import java.awt.Graphics;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class AlienHorde implements Runnable {
 
     }
 
-    private static void playClip(File clipFile) throws IOException,
+    private static void playClip(URL clipFile) throws IOException,
             UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
         class AudioListener implements LineListener {
             private boolean done = false;
@@ -218,7 +218,7 @@ public class AlienHorde implements Runnable {
     @Override
     public void run() {
         try {
-            playClip(new File("kaboom.wav"));
+            playClip(this.getClass().getResource("kaboom.wav"));
         } catch (Exception e) {
             e.printStackTrace();
         }
