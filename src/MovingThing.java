@@ -1,11 +1,11 @@
 import java.awt.Graphics;
 
 public abstract class MovingThing implements Moveable {
-    // add instance variables (look at your constructors)
     int x;
     int y;
     int width;
     int height;
+
     public MovingThing() {
         this(10, 10, 10, 10);
     }
@@ -21,7 +21,6 @@ public abstract class MovingThing implements Moveable {
         height = h;
     }
 
-    // add necessary implementations (look at interface)
     public void setPos(int x, int y) {
         this.x = x;
         this.y = y;
@@ -34,7 +33,7 @@ public abstract class MovingThing implements Moveable {
     public void setY(int y) {
         this.y = y;
     }
-    
+
     public int getX() {
         return x;
     }
@@ -46,7 +45,7 @@ public abstract class MovingThing implements Moveable {
     public int getWidth() {
         return width;
     }
-    
+
     public int getHeight() {
         return height;
     }
@@ -58,7 +57,7 @@ public abstract class MovingThing implements Moveable {
     public void setHeight(int h) {
         height = h;
     }
-    // do not change code below this line
+
     public abstract void move(String direction);
 
     public abstract void draw(Graphics window);

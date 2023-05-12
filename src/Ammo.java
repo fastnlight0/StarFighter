@@ -30,18 +30,11 @@ public class Ammo extends MovingThing {
     }
 
     public void draw(Graphics window) {
-        // add code to draw the ammo
-        // ammo will be a yellow square
-        // use window.setColor(COLOR) to set the color
-        // if you don't set a color, your ammo will be black and you will not see it
-        // use window.fillRect(x,y,w,h); to make a rectangle/square
         window.setColor(Color.YELLOW);
         window.fillRect(getX(), getY(), getWidth(), getHeight());
     }
 
     public void move(String direction) {
-        // add code to move the ammo
-        // ship ammo should only move up
         setY(getY() - speed);
     }
 
