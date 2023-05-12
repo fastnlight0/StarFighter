@@ -19,12 +19,6 @@ public class AlienHorde implements Runnable {
     private int bombCooldown;
 
     public AlienHorde(int size) {
-        // initalize ArrayList
-        // and fill with size amount of aliens (75 pixels apart)
-        // if your row is full (out of bounds of screen)
-        // move down a row (75 pixels)
-        // starting point is 25, 50
-        // first add aliens with speed of 0 to make sure you spacing is good
         aliens = new ArrayList<>();
         bombCooldown = 0;
         int x = 25;
@@ -80,12 +74,6 @@ public class AlienHorde implements Runnable {
     }
 
     public AlienHorde(int size, int speed) {
-        // initalize ArrayList
-        // and fill with size amount of aliens (75 pixels apart)
-        // if your row is full (out of bounds of screen)
-        // move down a row (75 pixels)
-        // starting point is 25, 50
-        // first add aliens with speed of 0 to make sure you spacing is good
         aliens = new ArrayList<>();
         int x = 25;
         int y = 50;
@@ -117,12 +105,7 @@ public class AlienHorde implements Runnable {
     }
 
     public int removeDeadOnes(List<Ammo> shots) {
-        // Part 3
-        // for every shot in the list
-        // check if you've hit any alien in the list
-        // (do the coordinates of the shot fall between the boundarises of the alien)
-        // if they do then remove the alien and the shot
-        // make sure you break out of the loop if this happens
+        // removes shot aliens
         int count = 0;
         if (shots.size() == 0 || aliens.size() == 0)
             return 0;
@@ -144,6 +127,7 @@ public class AlienHorde implements Runnable {
     }
 
     public boolean hitPlayer(Ship player) {
+        // did the aliens hit the player?
         for (int i = aliens.size() - 1; i >= 0; i--) {
             Alien al = aliens.get(i);
             if (al.getX() - player.getX() <= 30 && al.getX() - player.getX() > -1 && al.getY() - player.getY() <= 30
@@ -155,6 +139,7 @@ public class AlienHorde implements Runnable {
     }
 
     public int removePassed() {
+        // did the aliens get to the bottom?
         int count = 0;
         for (int i = aliens.size() - 1; i >= 0; i--) {
             Alien al = aliens.get(i);
@@ -167,6 +152,7 @@ public class AlienHorde implements Runnable {
     }
 
     public boolean anyBombsHit(Ship ship) {
+        // did the aliens' bombs hit the player?
         for (Alien al : aliens) {
             if (al.bombHitShip(ship)) {
                 return true;
@@ -180,6 +166,7 @@ public class AlienHorde implements Runnable {
             al.drawBomb(window);
         }
     }
+
     public void moveAllBombs() {
         for (Alien al : aliens) {
             al.moveBomb();

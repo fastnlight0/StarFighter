@@ -1,6 +1,3 @@
-//This is done
-//Use this file to run the game
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;

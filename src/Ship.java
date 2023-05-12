@@ -23,13 +23,10 @@ public class Ship extends MovingThing {
         super(x, y, w, h);
         speed = s;
         try {
-            // this sets ship.jpg as the image for your ship
-            // for this to work ship.jpg needs to be in the same folder as this .java file
             URL url = getClass().getResource("ship.jpg");
             image = ImageIO.read(url);
         } catch (Exception e) {
-            // feel free to do something here or not
-            System.err.println("ur trash at coding lmao: " + e.getStackTrace());
+            System.err.println("Error while trying to load ship image: " + e.getStackTrace());
         }
     }
 
@@ -42,9 +39,6 @@ public class Ship extends MovingThing {
     }
 
     public void move(String direction) {
-        // add code here
-        // think about ALL your global variables and how you can use them to "move"
-        // keep your parameter in mind as well
         if (direction.equals("LEFT") && getX() >= 0) {
             setX(getX() - speed);
         } else if (direction.equals("RIGHT") && getX() <= 750) {

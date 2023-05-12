@@ -9,6 +9,7 @@ public class Alien extends MovingThing {
     private Image image;
 
     private Bomb bomb;
+
     public Alien() {
         this(0, 0, 30, 30, 0);
     }
@@ -29,7 +30,7 @@ public class Alien extends MovingThing {
             URL url = getClass().getResource("alien.jpg");
             image = ImageIO.read(url);
         } catch (Exception e) {
-            System.err.println("ur trash at coding lmao: " + e.getStackTrace());
+            System.err.println("Error while trying to load alien image: " + e.getStackTrace());
         }
     }
 
@@ -42,12 +43,7 @@ public class Alien extends MovingThing {
     }
 
     public void move(String direction) {
-        // add code here
-        // check that the alien is within the bounds of the screen (see
-        // Starfighter.java)
-        // if alien is out of bounds change speed direction
-        // and move the alien down a row (40 pixels)
-        // constantly change the x position of the alien by the speed
+        // moves alien in space invaders pattern
         if (getX() <= 0 || getX() >= 800) {
             setY(getY() + 40);
             speed = -speed;
@@ -81,12 +77,7 @@ public class Alien extends MovingThing {
     public boolean bombHitShip(Ship ship) {
         return bomb != null && bomb.isTouchingShip(ship);
     }
-    
-    /*
-     * The draw method is done for you.
-     * This method will move the alien and update it's location on screen by
-     * constantly redrawing it.
-     */
+
     public void draw(Graphics window) {
         move("DOWN");
         window.drawImage(image, getX(), getY(), getWidth(), getHeight(), null);

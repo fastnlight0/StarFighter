@@ -22,12 +22,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class OuterSpace extends Canvas implements KeyListener, Runnable {
     private int cooldown;
-    // uncomment and comment as necessary as you add functionality to your project*
     private AlienHorde horde;
     private Bullets shots;
     private Ship ship;
-    // private Alien alienOne;
-    // private Alien alienTwo;
 
     private int shipSpeed;
     private int alienSpeed;
@@ -129,7 +126,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
 
         {
             bgmusic = AudioSystem.getClip();
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(this.getClass().getResource("background.wav"));
+            AudioInputStream inputStream = AudioSystem
+                    .getAudioInputStream(this.getClass().getResource("background.wav"));
             bgmusic.open(inputStream);
             FloatControl gainControl = (FloatControl) bgmusic.getControl(FloatControl.Type.MASTER_GAIN);
             gainControl.setValue(20f * (float) Math.log10(.2f));
@@ -141,7 +139,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         // setup star sound
         try {
             starSound = AudioSystem.getClip();
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(this.getClass().getResource("starSound.wav"));
+            AudioInputStream inputStream = AudioSystem
+                    .getAudioInputStream(this.getClass().getResource("starSound.wav"));
             starSound.open(inputStream);
             FloatControl gainControl = (FloatControl) starSound.getControl(FloatControl.Type.MASTER_GAIN);
             gainControl.setValue(20f * (float) Math.log10(1.5f));
@@ -243,7 +242,6 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
             st.update();
     }
 
-    // the top part of the paint method is done for you
     public void paint(Graphics window) {
         // set up the double buffering to make the game animation nice and smooth
         Graphics2D twoDGraph = (Graphics2D) window;
@@ -254,9 +252,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
             back = (BufferedImage) (createImage(getWidth(), getHeight()));
 
         // create a graphics reference to the back ground image
-        // we will draw all changes on the background image
         Graphics graphToBack = back.createGraphics();
-        // this sets the background for the graphics window
         // game over
         if (lives <= 0) {
             bgmusic.stop();
@@ -302,6 +298,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
                 restart(shipSpeedRound, alienSpeedRound, numOfAliensRound, score, false, lives);
             }
 
+            // this sets the background for the graphics window
             graphToBack.setColor(Color.BLACK);
             graphToBack.fillRect(0, 0, getWidth(), getHeight());
 
@@ -318,17 +315,14 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
             if (keys[3]) {
                 ship.move("DOWN");
             }
-            // add code to fire a bullet - Part 3
             if (keys[4]) {
                 if (cooldown <= 0) {
+                    // fire a bullet
                     shots.add(new Ammo(ship.getX() + 20, ship.getY(), 5));
                     cooldown = rapidfire ? 10 : 50;
                     new Thread(pewSound).start();
                 }
             }
-            // add in collision detection to see if Bullets hit the Aliens and if Bullets
-            // hit the Ship -- Part 3
-            // make sure you've drawn all your stuff
             horde.decreaseBombCooldown();
             horde.randomlyDropBombs();
             horde.drawAllBombs(graphToBack);
@@ -499,7 +493,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
                 repaint();
             }
         } catch (Exception e) {
-            System.err.println("ur trash at coding lmao: " + e.getStackTrace());
+            System.err.println("Error while painting frames: " + e.getStackTrace());
         }
     }
 }
